@@ -1,5 +1,3 @@
-import os
-import subprocess
 from libraries.git import BranchCreator
 from libraries.issues import JiraIssueResolver
 
