@@ -10,6 +10,11 @@ To get up and running do the following:
 2. run `python3 path/to/repo TICKET-KEY`
 example: `python3 branch-creator TEST-123`
 
+### Example
+Let's say I have an issue of the type Story with the key `TEST-123`, and the title for that issue is: `As an admin, I want to be able to see login statistics for the users`, and I have a repository whose path is `~/code/my-repo`
+
+Once we use the application, the `my-repo` repository will checkout a new local branch with the name: `feature/TEST-123-as-an-admin-i-want-to-be-able-to-see-login-statistics-for-the-users`
+
 ## Configuration
 The app will ask you for variables, but to streamline the experience you can add the variables in your `~/.bashrc` or `~/.zshrc` file
 
