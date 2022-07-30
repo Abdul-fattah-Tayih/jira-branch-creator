@@ -11,7 +11,7 @@ Tested on Ubuntu 22.04 and MacOS Monterey (12.5)
 ## Usage
 To get up and running do the following:
 
-1. clone the repository
+1. clone the repository `git clone git@github.com:Abdul-fattah-Tayih/jira-branch-creator.git`
 2. run `pip install -r requirements.txt`
 3. run `python3 path/to/repo TICKET-KEY`
 example: `python3 branch-creator TEST-123`
