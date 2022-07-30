@@ -1,5 +1,7 @@
 import os, re
 import subprocess
+
+from colorama import Fore
 from libraries.issues import JiraIssue
 
 class BranchCreator:
@@ -21,8 +23,8 @@ class BranchCreator:
         try:
             os.chdir(os.path.expanduser(self.application_directory))
         except FileNotFoundError:
-            print(f'Application directory ({self.application_directory}) is invalid, terminating.')
-            return
+            print(f'{Fore.RED} Application directory ({self.application_directory}) is invalid, terminating.')
+            exit()
 
         branch_name = f'{self.resolve_branch_type()}/{self.jira_issue.key}-{self.normalize_title()}'
         subprocess.call(['git', 'checkout', '-b', branch_name])

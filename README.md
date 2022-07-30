@@ -3,11 +3,17 @@ This is a simple command line application for creating local git branches using 
 
 What this does is retrieve the issue metadata and navigate to your repository and checkout a local branch with the generated name
 
+## Support
+Currently Jira Branch Creator only works on *NIX systems, this includes MacOS and Linux, support for windows is not there yet
+
+Tested on Ubuntu 22.04 and MacOS Monterey (12.5)
+
 ## Usage
 To get up and running do the following:
 
 1. clone the repository
-2. run `python3 path/to/repo TICKET-KEY`
+2. run `pip install -r requirements.txt`
+3. run `python3 path/to/repo TICKET-KEY`
 example: `python3 branch-creator TEST-123`
 
 ### Example

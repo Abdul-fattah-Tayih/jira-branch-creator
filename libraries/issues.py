@@ -1,4 +1,5 @@
 import json
+from colorama import Fore
 import requests
 from requests.auth import HTTPBasicAuth
 
@@ -40,7 +41,8 @@ class JiraIssueResolver:
         )
 
         if response.status_code != 200:
-            raise requests.RequestException(f'Request failed for {self.issue_key}, error: {response.reason}')
+            print(f'{Fore.RED} Request failed for {self.issue_key}, error: {response.reason}')
+            exit()
 
         response_json = json.loads(response.text)
         
