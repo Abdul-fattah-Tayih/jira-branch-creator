@@ -11,5 +11,5 @@ class BranchService:
 
     def create_branch(self):
         jira_issue = JiraIssueResolver(self.jira_subdomain, self.issue_key, self.email, self.api_key).retrieve()
-        branch_creator = BranchCreator(self.application_directory, jira_issue)
+        branch_creator = BranchCreator(jira_issue, self.application_directory)
         branch_creator.create_branch()
