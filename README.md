@@ -43,7 +43,7 @@ export jira_branch_creator_api_key="your_jira_api_key"
 export jira_branch_creator_jira_subdomain="your_organization_subdomain"
 ```
 
-### Roadmap
+## Roadmap
 - [x] alpha release: create branches locally
 - [ ] unit testing
 - [ ] Simplify configuration
