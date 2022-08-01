@@ -1,9 +1,9 @@
 import os, re
 import subprocess
 from typing import Optional
-
 from colorama import Fore
 from libraries.issues import JiraIssue
+from libraries.utilities import limit_words, slugify
 
 class BranchCreator:
     def __init__(self, jira_issue: JiraIssue, application_directory: Optional[str] = None) -> None:
@@ -15,8 +15,9 @@ class BranchCreator:
 
     def normalize_title(self) -> str:
         title = self.jira_issue.title
-        title = title.lower().replace(" ", "-")
-        title = re.sub('[^a-zA-Z0-9 \-\n\.]', '', title)
+        title = re.sub('[^a-zA-Z0-9 \n]', '', title).strip()
+        title = limit_words(title, 8)
+        title = slugify(title)
 
         return title
 
