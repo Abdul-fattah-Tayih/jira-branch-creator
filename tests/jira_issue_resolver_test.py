@@ -44,7 +44,7 @@ class JiraIssueResolverTest(unittest.TestCase):
         request_mock.return_value = response_mock
 
         resolver = JiraIssueResolver('abc', 'test-123', 'a@b.com', '123')
-        issue = resolver.retrieve()
+        issue = resolver.resolve()
 
         self.assertEquals(issue.__class__, JiraIssue)
         self.assertEquals(issue.title, 'I am a test issue')
@@ -57,4 +57,4 @@ class JiraIssueResolverTest(unittest.TestCase):
         response_mock.status_code = 401
         request_mock.return_value = response_mock
 
-        self.assertRaises(SystemExit, lambda: JiraIssueResolver('abc', 'test-123', 'a@b.com', '123').retrieve())
+        self.assertRaises(SystemExit, lambda: JiraIssueResolver('abc', 'test-123', 'a@b.com', '123').resolve())
