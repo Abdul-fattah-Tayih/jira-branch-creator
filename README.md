@@ -45,7 +45,11 @@ export jira_branch_creator_jira_subdomain="your_organization_subdomain"
 
 ## Roadmap
 - [x] alpha release: create branches locally
-- [ ] unit testing
+- [x] unit testing
+- [ ] improve experience
+    - [ ] add word limit option
+    - [ ] add arguments for required variables
+    - [ ] call app with name instead of `python3 path`
 - [ ] Simplify configuration
 - [ ] Add optional arguements to command to avoid tinkering with env
 - [ ] Support Windows

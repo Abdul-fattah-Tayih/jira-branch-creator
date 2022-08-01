@@ -27,7 +27,7 @@ class JiraIssueResolver:
         self.email = email
         self.api_key = api_key
 
-    def retrieve(self) -> JiraIssue:
+    def resolve(self) -> JiraIssue:
         auth = HTTPBasicAuth(self.email, self.api_key)
         headers = {
             "Accept": "application/json"
