@@ -18,7 +18,7 @@ class JiraIssueResolverTest(unittest.TestCase):
         }"""
 
         request_mock.return_value = response_mock
-        JiraIssueResolver('abc', 'test-123', 'a@b.com', '123').retrieve()
+        JiraIssueResolver('abc', 'test-123', 'a@b.com', '123').resolve()
 
         request_mock.assert_called_once_with(
             'GET',
