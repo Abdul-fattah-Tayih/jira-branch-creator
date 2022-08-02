@@ -29,6 +29,21 @@ class JiraIssueResolverTest(unittest.TestCase):
         branch_name = self.branch_creator.get_branch_name()
         self.assertEquals(branch_name, 'bugfix/test-123-i-am-an-issue')
 
+    def test_it_limits_issue_title_to_8_words(self):
+        self.issue.title = 'Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit'
+        branch_name = self.branch_creator.get_branch_name()
+        self.assertEquals(branch_name, 'bugfix/test-123-neque-porro-quisquam-est-qui-dolorem-ipsum-quia')
+
+    def test_it_removes_all_special_charters_from_title(self):
+        self.issue.title = '*Neque ^porro &quisquam! est $qui? (dolorem) #ipsum... -quia+ dolor sit amet, consectetur, adipisci velit'
+        branch_name = self.branch_creator.get_branch_name()
+        self.assertEquals(branch_name, 'bugfix/test-123-neque-porro-quisquam-est-qui-dolorem-ipsum-quia')
+
+    def test_it_strips_leading_and_trailing_whitespaces_from_jira_title(self):
+        self.issue.title = '        Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit     '
+        branch_name = self.branch_creator.get_branch_name()
+        self.assertEquals(branch_name, 'bugfix/test-123-neque-porro-quisquam-est-qui-dolorem-ipsum-quia')
+
     @patch('os.chdir')
     def test_it_changes_directory_to_target_directory_if_defined(self, chdir_mock: Mock):        
         self.branch_creator.create_branch()
