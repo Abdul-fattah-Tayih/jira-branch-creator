@@ -9,7 +9,9 @@ What this does is retrieve the issue metadata and navigate to your repository an
 To get up and running do the following:
 
 1. clone the repository `git clone git@github.com:Abdul-fattah-Tayih/jira-branch-creator.git`
-2. run `pip install -r requirements.txt`
+2. navigate to the `jira-branch-creator` directory
+3. run `pip install -r requirements.txt`
+4. run `pip install --editable .`
 
 ## Support
 Currently Jira Branch Creator only works on *NIX systems, this includes MacOS and Linux, support for windows is not there yet
@@ -17,7 +19,7 @@ Currently Jira Branch Creator only works on *NIX systems, this includes MacOS an
 Tested on Ubuntu 22.04 and MacOS Monterey (12.5)
 
 ## Usage
-run `python3 path/to/repo TICKET-KEY`
+run `jira-branch-creator ISSUE_KEY JIRA_USERNAME JIRA_API_KEY JIRA_SUBDOMAIN`
 
 ### Usage Examples
 Let's say I have an issue of the type Story with the key `TEST-123`, and the title for that issue is: `As an admin, I want to be able to see login statistics for the users`, and I have a repository whose path is `~/code/my-repo`
@@ -47,9 +49,9 @@ export jira_branch_creator_jira_subdomain="your_organization_subdomain"
 - [x] alpha release: create branches locally
 - [x] unit testing
 - [ ] improve experience
-    - [ ] add word limit option
-    - [ ] add arguments for required variables
-    - [ ] call app with name instead of `python3 path`
+    - [x] add word limit option
+    - [x] add arguments for required variables
+    - [x] call app with name instead of `python3 path`
 - [ ] Simplify configuration
 - [ ] Add optional arguements to command to avoid tinkering with env
 - [ ] Support Windows
