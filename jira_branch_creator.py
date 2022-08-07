@@ -21,7 +21,7 @@ def cli(
         jira_api_key: str,
         jira_subdomain: str,
         target_dir: str,
-        branch_word_limit: Optional[str|int],
+        branch_word_limit: Optional[str],
         branch_type: Optional[str]
     ):
     """

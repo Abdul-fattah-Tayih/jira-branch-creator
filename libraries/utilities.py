@@ -1,4 +1,4 @@
-def limit_words(string: str, limit: str|int) -> str:
+def limit_words(string: str, limit) -> str:
     if isinstance(limit, str):
         limit = int(limit)
 
