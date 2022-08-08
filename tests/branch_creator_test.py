@@ -13,14 +13,26 @@ class JiraIssueResolverTest(unittest.TestCase):
 
     def test_it_returns_branch_type_bugfix_if_issue_is_a_bug(self):
         type = self.branch_creator.resolve_branch_type()
+        branch_name = self.branch_creator.get_branch_name()
 
         self.assertEquals('bugfix', type)
+        self.assertEquals(branch_name, 'bugfix/test-123-i-am-an-issue')
 
     def test_it_returns_branch_type_feature_if_issue_is_not_a_bug(self):
         self.issue.type = 'Story'
         type = self.branch_creator.resolve_branch_type()
+        branch_name = self.branch_creator.get_branch_name()
 
         self.assertEquals('feature', type)
+        self.assertEquals(branch_name, 'feature/test-123-i-am-an-issue')
+
+    def test_it_returns_provided_branch_type_if_given(self):
+        self.branch_creator.branch_type = 'hotfix'
+        type = self.branch_creator.resolve_branch_type()
+        branch_name = self.branch_creator.get_branch_name()
+
+        self.assertEquals('hotfix', type)
+        self.assertEquals(branch_name, 'hotfix/test-123-i-am-an-issue')
 
     def test_it_includes_issue_key_in_branch_name(self):
         self.assertTrue('test-123' in self.branch_creator.get_branch_name())
@@ -29,10 +41,22 @@ class JiraIssueResolverTest(unittest.TestCase):
         branch_name = self.branch_creator.get_branch_name()
         self.assertEquals(branch_name, 'bugfix/test-123-i-am-an-issue')
 
-    def test_it_limits_issue_title_to_8_words(self):
+    def test_it_limits_issue_title_to_8_words_by_default(self):
         self.issue.title = 'Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit'
         branch_name = self.branch_creator.get_branch_name()
         self.assertEquals(branch_name, 'bugfix/test-123-neque-porro-quisquam-est-qui-dolorem-ipsum-quia')
+
+    def test_it_limits_issue_title_to_given_length(self):
+        self.branch_creator.branch_word_limit = 4
+        self.issue.title = 'Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit'
+        branch_name = self.branch_creator.get_branch_name()
+        self.assertEquals(branch_name, 'bugfix/test-123-neque-porro-quisquam-est')
+
+    def test_it_doesnt_limit_issue_title_if_given_length_is_minus_one(self):
+        self.branch_creator.branch_word_limit = -1
+        self.issue.title = 'Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit'
+        branch_name = self.branch_creator.get_branch_name()
+        self.assertEquals(branch_name, 'bugfix/test-123-neque-porro-quisquam-est-qui-dolorem-ipsum-quia-dolor-sit-amet-consectetur-adipisci-velit')
 
     def test_it_removes_all_special_charters_from_title(self):
         self.issue.title = '*Neque ^porro &quisquam! est $qui? (dolorem) #ipsum... -quia+ dolor sit amet, consectetur, adipisci velit'

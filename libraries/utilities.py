@@ -1,4 +1,7 @@
-def limit_words(string: str, limit: int) -> str:
+def limit_words(string: str, limit) -> str:
+    if isinstance(limit, str):
+        limit = int(limit)
+
     word_list = string.split(' ')[:limit]
     return ' '.join(word_list)
 

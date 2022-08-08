@@ -1,34 +1,56 @@
 import os
-import sys
-from colorama import Fore, init
+from sys import argv
+import click
+from colorama import init
+from typing import Optional
 from services.branches import BranchService
 
-def cli():
+def is_variable_required(env_variable) -> bool:
+    return env_variable not in os.environ
+
+@click.command()
+@click.argument('issue_key', required=True)
+@click.argument('jira_username', required=is_variable_required('jira_branch_creator_email'))
+@click.argument('jira_api_key', required=is_variable_required('jira_branch_creator_api_key'))
+@click.argument('jira_subdomain', required=is_variable_required('jira_branch_creator_jira_subdomain'))
+@click.option('--target-dir', default=os.curdir, help='The target directory, defaults to the current directory')
+@click.option('--branch-word-limit', help='Limit the words of the branch name, default is 8, you can use -1 to include the entire issue name in the branch')
+@click.option('--branch-type', help='By default jira-branch-creator resolves issues to feature/branch or bugfix/branch, you can override that here')
+def cli(
+        issue_key: str,
+        jira_username: str,
+        jira_api_key: str,
+        jira_subdomain: str,
+        target_dir: str,
+        branch_word_limit: Optional[str],
+        branch_type: Optional[str]
+    ):
+    """
+        Checkout a local branch that is corresponding with a jira issue
+        
+        ISSUE_KEY: your jira issue key, eg (TEST-123)
+
+        JIRA_USERNAME: Your jira username or email that you use to login
+        
+        JIRA_API_KEY: Jira API key for your account, can obtained from https://id.atlassian.com/manage-profile/security/api-tokens
+
+        JIRA_SUBDOMAIN: your organization subdomain in jira, eg https://my-organization.atlassian.net/browse/TEST-123
+    """
+
     init()
-    variables = {
-        "jira_subdomain": None,
-        "application_directory": None,
-        "email": None,
-        "api_key": None
-    }
 
-    for variable_name in variables.keys():
-        env_name = f'jira_branch_creator_{variable_name}'
+    jira_username = jira_username or os.getenv('jira_branch_creator_email')
+    jira_api_key = jira_api_key or os.getenv('jira_branch_creator_api_key')
+    jira_subdomain = jira_subdomain or os.getenv('jira_branch_creator_jira_subdomain')
 
-        if env_name not in os.environ:
-            print(f'{Fore.LIGHTBLUE_EX}Tip: add {env_name} to your ~/.zshrc or ~/.bashrc file to avoid adding this every time you run the command')
-            if variable_name == 'application_directory':
-                variables[variable_name] = input(f'{Fore.WHITE}Please enter the value for {variable_name}, enter current if you want to use the current directory: ')
-                variables[variable_name] = None if variables[variable_name] == 'current' else variables[variable_name]
-            else:
-                variables[variable_name] = input(f'{Fore.WHITE}Please enter the value for {variable_name}: ')
-        else:
-            variables[variable_name] = os.environ[env_name]
+    service = BranchService(
+        jira_username,
+        jira_api_key,
+        issue_key,
+        jira_subdomain,
+        target_dir,
+        branch_word_limit,
+        branch_type
+    )
 
-    if len(sys.argv) < 2:
-        variables['issue_key'] = input('Enter issue key: ')
-    else:
-        variables['issue_key'] = sys.argv[1]
-
-    service = BranchService(**variables)
     service.create_branch()

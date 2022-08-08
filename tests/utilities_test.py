@@ -10,6 +10,10 @@ class UtilitiesTest(TestCase):
         paragraph = 'LoremIpsumDolor'
         self.assertEquals('LoremIpsumDolor', limit_words(paragraph, 2))
 
+    def test_limit_words_accepts_string_limit_and_converts_it_to_string(self):
+        paragraph = 'LoremIpsumDolor'
+        self.assertEquals('LoremIpsumDolor', limit_words(paragraph, '2'))
+
     def test_slugify_converts_string_to_lower_case(self):
         paragraph = 'LOREM'
         self.assertEquals('lorem', slugify(paragraph))
