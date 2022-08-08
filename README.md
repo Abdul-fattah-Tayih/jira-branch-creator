@@ -1,5 +1,5 @@
 # Jira Branch Creator
-![Screenshot from 2022-08-08 20-07-27](https://user-images.githubusercontent.com/47541643/183474569-cc5b1c3e-62c9-4d17-893f-f04c59d6d213.png)
+![Screenshot from 2022-08-08 20-07-27 (1)](https://user-images.githubusercontent.com/47541643/183477542-20da98bc-0f59-422e-b2f4-1fc98a14edc8.png)
 
 This is a simple command line application for creating local git branches using jira issue key and summary to keep track using jira, as well as making tracking tickets in your git easier by using the same names and summaries as the original jira tickets.
 
@@ -71,7 +71,7 @@ export jira_branch_creator_jira_subdomain="your_organization_subdomain"
     - [x] add word limit option
     - [x] add arguments for required variables
     - [x] call app with name instead of `python3 path`
+- [x] Add optional arguements to command to avoid tinkering with env
 - [ ] Simplify configuration
-- [ ] Add optional arguements to command to avoid tinkering with env
 - [ ] Support Windows
 - [ ] Add application to brew and apt
