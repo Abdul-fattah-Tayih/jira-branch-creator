@@ -1,5 +1,5 @@
 # Jira Branch Creator
-![jira branch creator](https://user-images.githubusercontent.com/47541643/181919365-8d18f52f-f87b-42ac-9f6c-9f8f2fba27f4.gif)
+![Screenshot from 2022-08-08 20-07-27](https://user-images.githubusercontent.com/47541643/183474569-cc5b1c3e-62c9-4d17-893f-f04c59d6d213.png)
 
 This is a simple command line application for creating local git branches using jira issue key and summary to keep track using jira, as well as making tracking tickets in your git easier by using the same names and summaries as the original jira tickets.
 
