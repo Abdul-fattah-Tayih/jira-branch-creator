@@ -1,17 +1,18 @@
 import os
+from sys import argv
 import click
 from colorama import init
 from typing import Optional
 from services.branches import BranchService
 
-def has_env(env_variable) -> bool:
+def is_variable_required(env_variable) -> bool:
     return env_variable not in os.environ
 
 @click.command()
 @click.argument('issue_key', required=True)
-@click.argument('jira_username', required=has_env('jira_branch_creator_email'))
-@click.argument('jira_api_key', required=has_env('jira_branch_creator_api_key'))
-@click.argument('jira_subdomain', required=has_env('jira_branch_creator_jira_subdomain'))
+@click.argument('jira_username', required=is_variable_required('jira_branch_creator_email'))
+@click.argument('jira_api_key', required=is_variable_required('jira_branch_creator_api_key'))
+@click.argument('jira_subdomain', required=is_variable_required('jira_branch_creator_jira_subdomain'))
 @click.option('--target-dir', default=os.curdir, help='The target directory, defaults to the current directory')
 @click.option('--branch-word-limit', help='Limit the words of the branch name, default is 8, you can use -1 to include the entire issue name in the branch')
 @click.option('--branch-type', help='By default jira-branch-creator resolves issues to feature/branch or bugfix/branch, you can override that here')
@@ -33,7 +34,7 @@ def cli(
         
         JIRA_API_KEY: Jira API key for your account, can obtained from https://id.atlassian.com/manage-profile/security/api-tokens
 
-        JIRA_SUBDOMAIN: your organization subdomain in jira, eg https://my-organization.atlassian.net/browse/TEST-123)
+        JIRA_SUBDOMAIN: your organization subdomain in jira, eg https://my-organization.atlassian.net/browse/TEST-123
     """
 
     init()

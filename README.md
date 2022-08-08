@@ -6,6 +6,20 @@ This is a simple command line application for creating local git branches using 
 What this does is retrieve the issue metadata and navigate to your repository and checkout a local branch with the generated name
 
 ## Installation
+Jira Branch Creator works on python 3.5+
+
+Make sure to upgrade pip to the latest version
+
+```shell 
+pip3 install --upgrade pip
+```
+
+And make sure your path includes the local bin path, for example if your user is called `test_user` then your path should include it, so you can edit your rc file `nano ~/.zshrc` or `nano ~/.bashrc` and add this line
+
+```bash
+export PATH="/home/test_user/.local/bin:$PATH"
+```
+
 To get up and running do the following:
 
 1. clone the repository `git clone git@github.com:Abdul-fattah-Tayih/jira-branch-creator.git`
@@ -19,11 +33,18 @@ Currently Jira Branch Creator only works on *NIX systems, this includes MacOS an
 Tested on Ubuntu 22.04 and MacOS Monterey (12.5)
 
 ## Usage
-run `jira-branch-creator ISSUE_KEY JIRA_USERNAME JIRA_API_KEY JIRA_SUBDOMAIN`
+run `jira-branch-creator ISSUE_KEY JIRA_USERNAME JIRA_API_KEY JIRA_SUBDOMAIN` in the directory of repository you want to use
+
+you can use `jira-branch-creator --help` to get more information
 
 ### Usage Examples
 Let's say I have an issue of the type Story with the key `TEST-123`, and the title for that issue is: `As an admin, I want to be able to see login statistics for the users`, and I have a repository whose path is `~/code/my-repo`
 
+What i would do is the following:
+```bash
+cd ~/code/my-repo
+jira-branch-creator TEST-123 my@email.com api_key my-organization
+```
 Once we use the application, the `my-repo` repository will checkout a new local branch with the name: `feature/TEST-123-as-an-admin-i-want-to-be-able-to-see-login-statistics-for-the-users`
 
 ## Configuration
@@ -33,13 +54,11 @@ The app will ask you for variables, but to streamline the experience you can add
 1. `jira_branch_creator_email`: The email or username of your account in jira
 2. `jira_branch_creator_api_key`: The api key for your jira account, you can create one [Here](https://id.atlassian.com/manage-profile/security/api-tokens)
 3. `jira_branch_creator_jira_subdomain`: The subdomain of your jira organization, for example in jira web your issue url would look like this `https://your-organization.atlassian.net/browse/TEST-123`, and so the value of this would be `your-organization`
-4. `jira_branch_creator_application_directory`: The path to your repository, for example: `~/code/my_repo`
 
 Open your rc file `nano ~/.bashrc` or `nano ~/.zshrc`
 
 And paste this code block, replacing the values you need
 ```bash
-export jira_branch_creator_application_directory="~/path/to/your/repo"
 export jira_branch_creator_email="your_jira_email@email.com"
 export jira_branch_creator_api_key="your_jira_api_key"
 export jira_branch_creator_jira_subdomain="your_organization_subdomain"
@@ -48,7 +67,7 @@ export jira_branch_creator_jira_subdomain="your_organization_subdomain"
 ## Roadmap
 - [x] alpha release: create branches locally
 - [x] unit testing
-- [ ] improve experience
+- [x] improve experience
     - [x] add word limit option
     - [x] add arguments for required variables
     - [x] call app with name instead of `python3 path`
