@@ -14,7 +14,7 @@ Make sure to upgrade pip to the latest version
 pip3 install --upgrade pip
 ```
 
-And make sure your path includes the local bin path, for example if your user is called `test_user` then your path should include it, so you can edit your rc file `nano ~/.zshrc` or `nano ~/.bashrc` and add this line
+if you're using zsh on ubuntu make sure your path includes the local bin path, for example if your user is called `test_user` then your path should include it, so you can edit your rc file `nano ~/.zshrc` or `nano ~/.bashrc` and add this line
 
 ```bash
 export PATH="/home/test_user/.local/bin:$PATH"
@@ -25,7 +25,7 @@ To get up and running do the following:
 1. clone the repository `git clone git@github.com:Abdul-fattah-Tayih/jira-branch-creator.git`
 2. navigate to the `jira-branch-creator` directory
 3. run `pip install -r requirements.txt`
-4. run `pip install --editable .`
+4. run `pip install .`
 
 ## Support
 Currently Jira Branch Creator only works on *NIX systems, this includes MacOS and Linux, support for windows is not there yet
